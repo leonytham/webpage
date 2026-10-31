@@ -1,0 +1,8 @@
+{
+  "name": "Remix Lim SH — AI Implementer \u0026 Digital Studio",
+  "description": "Websites, funnels, content and automations: built fast with AI, refined with care, and measured by results.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -49,11 +49,31 @@ export const ContactModal: React.FC<ContactModalProps> = ({
 
     setIsSubmitting(true);
     try {
-      await fetch('/api/contact', {
+      // Send directly to leonytham@gmail.com (works on GitHub Pages, Vercel, and AI Studio)
+      await fetch('https://formsubmit.co/ajax/leonytham@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          service,
+          budget,
+          message: message || 'No additional message provided.',
+          _subject: `New Project Inquiry from ${name} (${service})`,
+          _template: 'table',
+          _captcha: 'false'
+        }),
+      });
+
+      // Also notify local development server if running
+      fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, service, budget, message }),
-      });
+      }).catch(() => {});
     } catch (err) {
       console.warn('API submission notice:', err);
     } finally {
@@ -63,7 +83,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({
   };
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText('leony@folista.sh');
+    navigator.clipboard.writeText('leonytham@gmail.com');
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2000);
   };
@@ -233,13 +253,22 @@ export const ContactModal: React.FC<ContactModalProps> = ({
             {/* Email quick copy */}
             <div className="mt-5 pt-4 border-t border-slate-800/60 flex items-center justify-between text-xs text-slate-400">
               <span>Or email directly:</span>
-              <button
-                onClick={handleCopyEmail}
-                className="inline-flex items-center gap-1.5 text-sky-400 hover:text-sky-300 transition-colors cursor-pointer"
-              >
-                <span>leony@folista.sh</span>
-                {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
+              <div className="flex items-center gap-2">
+                <a
+                  href="mailto:leonytham@gmail.com"
+                  className="text-sky-400 hover:text-sky-300 transition-colors"
+                >
+                  leonytham@gmail.com
+                </a>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title="Copy email"
+                  className="p-1 hover:text-white bg-slate-900 border border-slate-800 rounded transition-colors cursor-pointer"
+                >
+                  {copiedEmail ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                </button>
+              </div>
             </div>
           </div>
         )}

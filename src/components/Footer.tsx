@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, MessageCircle } from 'lucide-react';
+import { MESSENGER_URL } from '../config';
 
 interface FooterProps {
   onOpenContact: () => void;
@@ -21,14 +22,16 @@ export const Footer: React.FC<FooterProps> = ({ onOpenContact }) => {
 
         {/* Right: Contact & Messaging Shortcuts */}
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => onOpenContact()}
+          <a
+            href={MESSENGER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-9 h-9 rounded-full bg-slate-900 hover:bg-slate-800 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-sky-400 transition-colors cursor-pointer"
-            title="Send a message"
+            title="Chat on Facebook Messenger"
             aria-label="Messenger"
           >
             <MessageCircle className="w-4 h-4" />
-          </button>
+          </a>
 
           <button
             onClick={() => onOpenContact()}

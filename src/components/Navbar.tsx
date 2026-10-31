@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageCircle } from 'lucide-react';
+import { MESSENGER_URL } from '../config';
 
 interface NavbarProps {
   onOpenContact: (defaultService?: string) => void;
@@ -76,12 +77,15 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
 
         {/* Zone 3: Primary Action */}
         <div className="hidden md:flex items-center shrink-0">
-          <button
-            onClick={() => onOpenContact()}
-            className="bg-[#38bdf8] hover:bg-[#7dd3fc] active:scale-98 text-slate-950 font-semibold text-sm px-5 py-2 rounded-full transition-all duration-150 shadow-sm shadow-sky-500/20 whitespace-nowrap cursor-pointer"
+          <a
+            href={MESSENGER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 bg-[#38bdf8] hover:bg-[#7dd3fc] active:scale-98 text-slate-950 font-semibold text-sm px-5 py-2 rounded-full transition-all duration-150 shadow-sm shadow-sky-500/20 whitespace-nowrap cursor-pointer"
           >
-            Get in touch
-          </button>
+            <MessageCircle className="w-4 h-4" />
+            <span>Get in touch</span>
+          </a>
         </div>
 
         {/* Mobile Hamburger Button */}
@@ -129,15 +133,16 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenContact }) => {
             </button>
           </nav>
           <div className="pt-2">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenContact();
-              }}
-              className="w-full bg-[#38bdf8] hover:bg-[#7dd3fc] text-slate-950 font-semibold text-sm py-2.5 rounded-full transition-colors"
+            <a
+              href={MESSENGER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMobileMenuOpen(false)}
+              className="w-full inline-flex items-center justify-center gap-2 bg-[#38bdf8] hover:bg-[#7dd3fc] text-slate-950 font-semibold text-sm py-2.5 rounded-full transition-colors cursor-pointer"
             >
-              Get in touch
-            </button>
+              <MessageCircle className="w-4 h-4" />
+              <span>Get in touch</span>
+            </a>
           </div>
         </div>
       )}

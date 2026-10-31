@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { X, Send, CheckCircle2, Copy, Check, Sparkles } from 'lucide-react';
+import { X, Send, CheckCircle2, Copy, Check, Sparkles, MessageCircle } from 'lucide-react';
+import { MESSENGER_URL } from '../config';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -142,17 +143,28 @@ export const ContactModal: React.FC<ContactModalProps> = ({
           </div>
         ) : (
           <div>
-            <div className="mb-6">
-              <div className="inline-flex items-center gap-1.5 text-xs text-sky-400 font-medium mb-1 uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Start a project</span>
+            <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-5 border-b border-slate-800/80">
+              <div>
+                <div className="inline-flex items-center gap-1.5 text-xs text-sky-400 font-medium mb-1 uppercase tracking-wider">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Start a project</span>
+                </div>
+                <h2 className="font-serif text-2xl sm:text-3xl font-normal text-white tracking-tight">
+                  Get in touch
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-300 mt-1">
+                  Share what you are working on, or chat with me live.
+                </p>
               </div>
-              <h2 className="font-serif text-2xl sm:text-3xl font-normal text-white tracking-tight">
-                Get in touch
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-300 mt-1">
-                Share what you are working on and we will build a tailored roadmap.
-              </p>
+              <a
+                href={MESSENGER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-sky-500/15 hover:bg-sky-500/25 text-sky-300 border border-sky-500/40 text-xs font-semibold transition-all shrink-0 cursor-pointer shadow-sm shadow-sky-500/10 active:scale-95"
+              >
+                <MessageCircle className="w-4 h-4 text-sky-400" />
+                <span>Chat on Messenger</span>
+              </a>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-4">

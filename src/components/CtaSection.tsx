@@ -1,4 +1,6 @@
 import React from 'react';
+import { MessageCircle } from 'lucide-react';
+import { MESSENGER_URL } from '../config';
 
 interface CtaSectionProps {
   onOpenContact: () => void;
@@ -24,12 +26,15 @@ export const CtaSection: React.FC<CtaSectionProps> = ({ onOpenContact }) => {
               Share what you are working on and the outcome you want. We can find the clearest next step together.
             </p>
 
-            <button
-              onClick={onOpenContact}
-              className="bg-[#38bdf8] hover:bg-[#7dd3fc] text-slate-950 font-semibold text-sm px-8 py-3.5 rounded-full transition-all duration-150 shadow-lg shadow-sky-500/25 active:scale-98 cursor-pointer"
+            <a
+              href={MESSENGER_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#38bdf8] hover:bg-[#7dd3fc] text-slate-950 font-semibold text-sm px-8 py-3.5 rounded-full transition-all duration-150 shadow-lg shadow-sky-500/25 active:scale-98 cursor-pointer"
             >
-              Get in touch
-            </button>
+              <MessageCircle className="w-4 h-4" />
+              <span>Get in touch</span>
+            </a>
           </div>
         </div>
       </div>
